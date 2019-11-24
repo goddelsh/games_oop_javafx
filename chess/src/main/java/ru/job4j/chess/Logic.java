@@ -26,12 +26,27 @@ public class Logic {
         int index = this.findBy(source);
         if (index != -1) {
             Cell[] steps = this.figures[index].way(source, dest);
-            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
+            if (steps.length > 0 && steps[steps.length - 1].equals(dest) && roadIsFree(steps)) {
+
                 rst = true;
                 this.figures[index] = this.figures[index].copy(dest);
             }
         }
         return rst;
+    }
+
+    private boolean roadIsFree(Cell[] steps) {
+        boolean result = true;
+        for(int stepIndex = 0; stepIndex < steps.length; stepIndex++) {
+            for (int figureIndex = 0; figureIndex < this.figures.length; figureIndex++){
+                if ((steps[stepIndex].x == this.figures[figureIndex].position().x)
+                        && (steps[stepIndex].y == this.figures[figureIndex].position().y)) {
+                    result = false;
+                    break;
+                }
+            }
+        }
+        return result;
     }
 
     public void clean() {

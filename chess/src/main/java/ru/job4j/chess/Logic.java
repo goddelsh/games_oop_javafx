@@ -39,12 +39,11 @@ public class Logic {
         return rst;
     }
 
-    public boolean roadIsFree(Cell[] steps) {
+    private boolean roadIsFree(Cell[] steps) {
         boolean result = true;
         for(int stepIndex = 0; stepIndex < steps.length; stepIndex++) {
             for (int figureIndex = 0; figureIndex < this.figures.length; figureIndex++){
-                if ((this.figures[figureIndex] != null)
-                        &&(steps[stepIndex].x == this.figures[figureIndex].position().x)
+                if ((steps[stepIndex].x == this.figures[figureIndex].position().x)
                         && (steps[stepIndex].y == this.figures[figureIndex].position().y)) {
                     result = false;
                     break;
